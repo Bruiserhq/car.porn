@@ -33,3 +33,80 @@
 .car-description {
   margin: 15px 0;
 }
+
+.affiliate-links {
+  margin: 20px 0;
+}
+
+.link-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.affiliate-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.ebay-button {
+  background-color: #e53238;
+}
+
+.ebay-button:hover {
+  background-color: #c7292e;
+}
+
+.amazon-button {
+  background-color: #ff9900;
+}
+
+.amazon-button:hover {
+  background-color: #e68a00;
+}
+
+.ad-container {
+  margin: 30px 0;
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.ad-placeholder {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.ad-placeholder p {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.mock-ad {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.mock-ad p {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.ad-small-text {
+  font-size: 12px !important;
+  font-weight: normal !important;
+  margin-top: 5px !important;
+  color: #666 !important;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './CarDetailPage.css';
+import { generateAffiliateLink } from '../../src/services/affiliateService';
 
 function CarDetailPage() {
   const { id } = useParams();
@@ -58,6 +59,41 @@ function CarDetailPage() {
           <h4>Description:</h4>
           <p>{car.description}</p>
         </div>
+        
+        <div className="affiliate-links">
+          <h4>Find Parts & Accessories:</h4>
+          <div className="link-buttons">
+            <a 
+              href={generateAffiliateLink(car).ebay} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="affiliate-button ebay-button"
+              data-testid="ebay-link"
+            >
+              Find parts on eBay
+            </a>
+            <a 
+              href={generateAffiliateLink(car).amazon} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="affiliate-button amazon-button"
+              data-testid="amazon-link"
+            >
+              Shop on Amazon
+            </a>
+          </div>
+        </div>
+        
+        <div className="ad-container" data-testid="detail-ad">
+          <div className="ad-placeholder">
+            <p>Advertisement</p>
+            <div className="mock-ad">
+              <p>Car Parts & Accessories</p>
+              <p className="ad-small-text">Premium quality, great prices</p>
+            </div>
+          </div>
+        </div>
+        
         <Link to="/">Back to Home</Link>
       </div>
     </div>

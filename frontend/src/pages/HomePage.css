@@ -34,3 +34,44 @@
   font-style: italic;
   margin: 15px 0;
 }
+
+.ad-container {
+  margin: 30px 0;
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.ad-placeholder {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.ad-placeholder p {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.mock-ad {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.mock-ad p {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.ad-small-text {
+  font-size: 12px !important;
+  font-weight: normal !important;
+  margin-top: 5px !important;
+  color: #666 !important;
+}

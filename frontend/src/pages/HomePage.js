@@ -51,6 +51,16 @@ function HomePage() {
         <p className="car-description">{featuredCar.description}</p>
         <Link to={`/cars/${featuredCar._id}`}>View Details</Link>
       </div>
+      
+      <div className="ad-container" data-testid="home-ad">
+        <div className="ad-placeholder">
+          <p>Advertisement</p>
+          <div className="mock-ad">
+            <p>Discover Your Next Classic Car</p>
+            <p className="ad-small-text">Browse our collection today</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -49,6 +49,10 @@ describe('HomePage Component', () => {
     expect(screen.getByText(`${mockFeaturedCar.year} ${mockFeaturedCar.make} ${mockFeaturedCar.model}`)).toBeInTheDocument();
     expect(screen.getByText(/filth score:/i)).toBeInTheDocument();
     expect(screen.getByText(mockFeaturedCar.description)).toBeInTheDocument();
+    
+    // Check for ad container
+    expect(screen.getByTestId('home-ad')).toBeInTheDocument();
+    expect(screen.getByText('Advertisement')).toBeInTheDocument();
   });
 
   test('renders error message when fetch fails', async () => {
