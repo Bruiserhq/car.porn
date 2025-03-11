@@ -14,6 +14,37 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET featured car
+router.get('/featured', async (req, res) => {
+  try {
+    // For now, just return the first car in the database
+    const featuredCar = await Car.findOne();
+    
+    if (!featuredCar) {
+      return res.status(404).json({ message: 'No featured car found' });
+    }
+    
+    res.status(200).json(featuredCar);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// GET car by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const car = await Car.findById(req.params.id);
+    
+    if (!car) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+    
+    res.status(200).json(car);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // POST a new car
 router.post('/', async (req, res) => {
   // Calculate filth score if not provided
