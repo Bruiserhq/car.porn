@@ -2,6 +2,10 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../src/app');
 const Car = require('../src/models/car');
+const { generateDescription } = require('../src/services/contentGenerator');
+
+// Mock the content generator
+jest.mock('../src/services/contentGenerator');
 
 // Mock mongoose connection
 jest.mock('mongoose', () => {
@@ -27,6 +31,11 @@ describe('Car API', () => {
     jest.spyOn(Car, 'find').mockResolvedValue([]);
     jest.spyOn(Car.prototype, 'save').mockImplementation(function () {
       return Promise.resolve(this);
+    });
+    
+    // Mock the description generation
+    generateDescription.mockImplementation((car) => {
+      return `Mock description for ${car.year} ${car.make} ${car.model}`;
     });
   });
 
@@ -70,6 +79,8 @@ describe('Car API', () => {
       expect(response.body).toHaveProperty('model', carData.model);
       expect(response.body).toHaveProperty('year', carData.year);
       expect(response.body).toHaveProperty('filthScore', carData.filthScore);
+      expect(response.body).toHaveProperty('description');
+      expect(response.body.description).toContain(carData.make);
     });
 
     it('should return 400 if required fields are missing', async () => {

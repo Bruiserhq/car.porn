@@ -17,6 +17,10 @@ const carSchema = new mongoose.Schema({
     type: Number,
     default: null,
   },
+  description: {
+    type: String,
+    default: 'No description available.',
+  },
 });
 
 module.exports = mongoose.model('Car', carSchema);

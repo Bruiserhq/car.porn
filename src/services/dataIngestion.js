@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Car = require('../models/car');
 const { calculateFilthFactor } = require('./filthFactor');
+const { generateDescription } = require('./contentGenerator');
 
 /**
  * Ingest mock car data from JSON file into the database
@@ -37,13 +38,20 @@ async function ingestMockData() {
       // Calculate filth score using the existing service
       const filthScore = calculateFilthFactor(carData);
 
-      // Create and save the new car
+      // Create the new car
       const car = new Car({
         make: carData.make,
         model: carData.model,
         year: carData.year,
         filthScore: filthScore,
       });
+
+      // Generate description
+      try {
+        car.description = generateDescription(car);
+      } catch (error) {
+        car.description = 'No description available.';
+      }
 
       await car.save();
       result.processed++;

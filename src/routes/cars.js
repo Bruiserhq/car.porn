@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Car = require('../models/car');
 const { calculateFilthFactor } = require('../services/filthFactor');
+const { generateDescription } = require('../services/contentGenerator');
 
 // GET all cars
 router.get('/', async (req, res) => {
@@ -19,12 +20,20 @@ router.post('/', async (req, res) => {
   const filthScore =
     req.body.filthScore !== undefined ? req.body.filthScore : calculateFilthFactor(req.body);
 
+  // Create car object
   const car = new Car({
     make: req.body.make,
     model: req.body.model,
     year: req.body.year,
     filthScore: filthScore,
   });
+
+  // Generate description
+  try {
+    car.description = generateDescription(car);
+  } catch (error) {
+    car.description = 'No description available.';
+  }
 
   try {
     const newCar = await car.save();

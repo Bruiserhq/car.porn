@@ -3,12 +3,14 @@ const path = require('path');
 const { ingestMockData } = require('../src/services/dataIngestion');
 const Car = require('../src/models/car');
 const { calculateFilthFactor } = require('../src/services/filthFactor');
+const { generateDescription } = require('../src/services/contentGenerator');
 
 // Mock the dependencies
 jest.mock('fs');
 jest.mock('path');
 jest.mock('../src/models/car');
 jest.mock('../src/services/filthFactor');
+jest.mock('../src/services/contentGenerator');
 
 describe('Data Ingestion Service', () => {
   // Sample mock data for testing
@@ -30,6 +32,11 @@ describe('Data Ingestion Service', () => {
     // Mock the filth factor calculation
     calculateFilthFactor.mockImplementation((car) => {
       return car.year < 2000 ? 35 : 15;
+    });
+
+    // Mock the description generation
+    generateDescription.mockImplementation((car) => {
+      return `Mock description for ${car.year} ${car.make} ${car.model}`;
     });
 
     // Mock Car.findOne to simulate checking for duplicates
@@ -66,6 +73,9 @@ describe('Data Ingestion Service', () => {
 
     // Verify calculateFilthFactor was called 3 times (for each unique car)
     expect(calculateFilthFactor).toHaveBeenCalledTimes(3);
+    
+    // Verify generateDescription was called 3 times (for each unique car)
+    expect(generateDescription).toHaveBeenCalledTimes(3);
 
     // Verify Car constructor was called 3 times with correct data
     expect(Car).toHaveBeenCalledTimes(3);
