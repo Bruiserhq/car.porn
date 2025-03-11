@@ -14,6 +14,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET featured car
+router.get('/featured', async (req, res) => {
+  try {
+    // For now, just return the first car in the database
+    const featuredCar = await Car.findOne();
+    
+    if (!featuredCar) {
+      return res.status(404).json({ message: 'No featured car found' });
+    }
+    
+    res.status(200).json(featuredCar);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // GET car by ID
 router.get('/:id', async (req, res) => {
   try {
@@ -58,6 +74,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+module.exports = router;
+
 // GET featured car
 router.get('/featured', async (req, res) => {
   try {
@@ -73,5 +91,3 @@ router.get('/featured', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-module.exports = router;
