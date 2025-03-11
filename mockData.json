@@ -1,0 +1,22 @@
+[
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": 1998
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "year": 2005
+  },
+  {
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 2020
+  },
+  {
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": 1998
+  }
+]
