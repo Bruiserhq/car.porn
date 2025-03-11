@@ -13,7 +13,7 @@ function CarDetailPage() {
     const fetchCar = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/cars/${id}`);
+        const response = await axios.get(`/cars/${id}`);
         setCar(response.data);
         setError(null);
       } catch (err) {

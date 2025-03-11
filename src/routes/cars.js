@@ -58,7 +58,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
 // GET featured car
 router.get('/featured', async (req, res) => {
   try {
@@ -74,3 +73,5 @@ router.get('/featured', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+module.exports = router;

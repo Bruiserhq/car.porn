@@ -12,7 +12,7 @@ function HomePage() {
     const fetchFeaturedCar = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/cars/featured');
+        const response = await axios.get('/cars/featured');
         setFeaturedCar(response.data);
         setError(null);
       } catch (err) {
