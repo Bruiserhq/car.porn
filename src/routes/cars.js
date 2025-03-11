@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Car = require('../models/car');
+const { calculateFilthFactor } = require('../services/filthFactor');
 
 // GET all cars
 router.get('/', async (req, res) => {
@@ -14,11 +15,16 @@ router.get('/', async (req, res) => {
 
 // POST a new car
 router.post('/', async (req, res) => {
+  // Calculate filth score if not provided
+  const filthScore = req.body.filthScore !== undefined 
+    ? req.body.filthScore 
+    : calculateFilthFactor(req.body);
+
   const car = new Car({
     make: req.body.make,
     model: req.body.model,
     year: req.body.year,
-    filthScore: req.body.filthScore
+    filthScore: filthScore
   });
 
   try {
