@@ -6,14 +6,17 @@ const carsRoutes = require('./routes/cars');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/car-app', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch(err => {
-  console.error('Error connecting to MongoDB', err);
-});
+mongoose
+  .connect('mongodb://localhost:27017/car-app', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB', err);
+  });
 
 // Middleware
 app.use(express.json());

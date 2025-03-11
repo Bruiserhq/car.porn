@@ -3,20 +3,20 @@ const mongoose = require('mongoose');
 const carSchema = new mongoose.Schema({
   make: {
     type: String,
-    required: true
+    required: true,
   },
   model: {
     type: String,
-    required: true
+    required: true,
   },
   year: {
     type: Number,
-    required: true
+    required: true,
   },
   filthScore: {
     type: Number,
-    default: null
-  }
+    default: null,
+  },
 });
 
 module.exports = mongoose.model('Car', carSchema);

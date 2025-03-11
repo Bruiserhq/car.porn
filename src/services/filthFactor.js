@@ -6,7 +6,7 @@
 function calculateFilthFactor(carData) {
   // Base filth factor is 10 for newer cars, 30 for older cars
   const baseScore = carData.year < 2000 ? 30 : 10;
-  
+
   // Add a constant for demonstration (5)
   return baseScore + 5;
 }
