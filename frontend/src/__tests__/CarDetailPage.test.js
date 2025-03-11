@@ -6,7 +6,7 @@ import CarDetailPage from '../pages/CarDetailPage';
 import { generateAffiliateLink } from '../services/affiliateService';
 
 // Mock the affiliate service
-jest.mock('../../src/services/affiliateService');
+jest.mock('../services/affiliateService');
 
 // Mock axios
 jest.mock('axios');
