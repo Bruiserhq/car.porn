@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './CarDetailPage.css';
-import { generateAffiliateLink } from '../../../src/services/affiliateService';
+import { generateAffiliateLink } from '../services/affiliateService';
 
 function CarDetailPage() {
   const { id } = useParams();

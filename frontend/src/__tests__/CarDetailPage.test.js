@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import CarDetailPage from '../pages/CarDetailPage';
-import { generateAffiliateLink } from '../../src/services/affiliateService';
+import { generateAffiliateLink } from '../services/affiliateService';
 
 // Mock the affiliate service
 jest.mock('../../src/services/affiliateService');
