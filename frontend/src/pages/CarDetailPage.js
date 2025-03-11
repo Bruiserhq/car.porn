@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import './CarDetailPage.css';
 
 function CarDetailPage() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function CarDetailPage() {
     const fetchCar = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/cars/${id}`);
+        const response = await axios.get(`/api/cars/${id}`);
         setCar(response.data);
         setError(null);
       } catch (err) {

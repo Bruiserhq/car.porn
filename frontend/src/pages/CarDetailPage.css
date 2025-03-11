@@ -1,0 +1,35 @@
+.loading, .error {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.error {
+  color: #d9534f;
+}
+
+.car-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.car-title {
+  margin-top: 0;
+  color: #333;
+}
+
+.car-detail {
+  margin: 10px 0;
+}
+
+.filth-score {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+.car-description {
+  margin: 15px 0;
+}

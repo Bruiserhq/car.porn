@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './HomePage.css';
 
 function HomePage() {
   const [featuredCar, setFeaturedCar] = useState(null);
@@ -11,7 +12,7 @@ function HomePage() {
     const fetchFeaturedCar = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/cars/featured');
+        const response = await axios.get('/api/cars/featured');
         setFeaturedCar(response.data);
         setError(null);
       } catch (err) {
