@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { handleSlackFeedback } = require('../services/slack');
 const Feedback = require('../models/feedback');
+const { authenticate, authorize } = require('../middleware/auth');
 
-// POST feedback from Slack
-router.post('/feedback', async (req, res) => {
+// POST feedback from Slack - protected route
+router.post('/feedback', authenticate, authorize(['admin', 'curator']), async (req, res) => {
   try {
     // Process the incoming Slack payload
     const processedFeedback = handleSlackFeedback(req.body);

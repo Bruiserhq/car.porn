@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const app = require('../src/app');
 const { postCandidatesToSlack, handleSlackFeedback } = require('../src/services/slack');
 const Feedback = require('../src/models/feedback');
+const { generateToken, verifyToken } = require('../services/authService');
 
-// Mock the Feedback model
+// Mock the Feedback model and auth service
 jest.mock('../src/models/feedback');
+jest.mock('../services/authService');
 
 // Mock console.log to avoid cluttering test output
 jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -52,6 +54,14 @@ describe('Slack Service', () => {
 });
 
 describe('Slack Routes', () => {
+  // Mock token for testing
+  const mockToken = 'mock-jwt-token';
+  const mockUser = {
+    id: 'user-id',
+    email: 'admin@example.com',
+    role: 'admin'
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
     
@@ -59,10 +69,38 @@ describe('Slack Routes', () => {
     Feedback.prototype.save = jest.fn().mockImplementation(function() {
       return Promise.resolve(this);
     });
+
+    // Mock token verification
+    generateToken.mockReturnValue(mockToken);
+    verifyToken.mockImplementation((token) => {
+      if (token === mockToken) {
+        return mockUser;
+      }
+      throw new Error('Invalid token');
+    });
   });
   
   describe('POST /slack/feedback', () => {
-    it('should process feedback and save to database', async () => {
+    it('should return 401 if no token is provided', async () => {
+      const response = await request(app)
+        .post('/slack/feedback')
+        .send({ carIds: ['123'], notes: 'Test feedback' });
+
+      expect(response.status).toBe(401);
+      expect(response.body).toHaveProperty('message', 'Authorization token required');
+    });
+
+    it('should return 401 if invalid token is provided', async () => {
+      const response = await request(app)
+        .post('/slack/feedback')
+        .set('Authorization', 'Bearer invalid-token')
+        .send({ carIds: ['123'], notes: 'Test feedback' });
+
+      expect(response.status).toBe(401);
+      expect(response.body).toHaveProperty('message', 'Invalid token');
+    });
+
+    it('should process feedback and save to database when authenticated', async () => {
       const mockPayload = {
         carIds: ['60d21b4667d0d8992e610c85', '60d21b4667d0d8992e610c86'],
         notes: 'Approved these cars'
@@ -70,6 +108,7 @@ describe('Slack Routes', () => {
       
       const response = await request(app)
         .post('/slack/feedback')
+        .set('Authorization', `Bearer ${mockToken}`)
         .send(mockPayload)
         .set('Content-Type', 'application/json');
       
@@ -91,6 +130,7 @@ describe('Slack Routes', () => {
       
       const response = await request(app)
         .post('/slack/feedback')
+        .set('Authorization', `Bearer ${mockToken}`)
         .send(mockPayload)
         .set('Content-Type', 'application/json');
       

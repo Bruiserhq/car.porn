@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const carsRoutes = require('./routes/cars');
 const slackRoutes = require('./routes/slack');
+const authRoutes = require('./routes/auth');
 
 // Create Express application
 const app = express();
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 // Use routes
 app.use('/cars', carsRoutes);
 app.use('/slack', slackRoutes);
+app.use('/auth', authRoutes);
 
 // Export app for testing
 module.exports = app;
